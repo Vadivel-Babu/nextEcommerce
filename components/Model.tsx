@@ -3,7 +3,11 @@ import { Rate, Spin } from "antd";
 import { useGetSingleProduct } from "@/services/getSingleProduct";
 
 const Model = ({ open, Id }) => {
-  const { data, isLoading } = useGetSingleProduct(Id);
+  const { data, isLoading, isError, error } = useGetSingleProduct(Id);
+
+  if (isError) {
+    toast.error(error?.message);
+  }
 
   return (
     <div

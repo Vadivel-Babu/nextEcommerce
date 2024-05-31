@@ -4,11 +4,15 @@ import Productcard from "./Productcard";
 import { Pagination, Spin } from "antd";
 import { useState } from "react";
 import { Product } from "@/types/product";
+import { toast } from "react-toastify";
 
 const Productlist = () => {
-  const { data, isLoading, isError } = useGetAllProducts();
+  const { data, isLoading, isError, error } = useGetAllProducts();
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
+  if (isError) {
+    toast.error(error?.message);
+  }
 
   return (
     <div className="flex flex-col justify-center items-center gap-2 ">
