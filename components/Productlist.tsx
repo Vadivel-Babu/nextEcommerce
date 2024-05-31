@@ -28,20 +28,27 @@ const Productlist = () => {
       ) : (
         <>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 grid-flow-row gap-1">
-            {data?.data
-              .filter((product: Product) =>
-                product.title.toLowerCase().includes(search.toLowerCase())
-              )
-              .slice((page - 1) * 10, page * 10)
-              .map((product: Product) => (
-                <Productcard key={product.id} product={product} />
-              ))}
+            {search.trim().length !== 0
+              ? data?.data
+                  .filter((product: Product) =>
+                    product.title.toLowerCase().includes(search.toLowerCase())
+                  )
+                  .map((product: Product) => (
+                    <Productcard key={product.id} product={product} />
+                  ))
+              : data?.data
+                  .slice((page - 1) * 10, page * 10)
+                  .map((product: Product) => (
+                    <Productcard key={product.id} product={product} />
+                  ))}
           </div>
-          <Pagination
-            defaultCurrent={search.trim().length === 0 ? page : 1}
-            total={data?.data.length}
-            onChange={(val) => setPage(val)}
-          />
+          {search.trim().length === 0 && (
+            <Pagination
+              defaultCurrent={page}
+              total={data?.data.length}
+              onChange={(val) => setPage(val)}
+            />
+          )}
         </>
       )}
     </div>
