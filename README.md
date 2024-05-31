@@ -1,7 +1,6 @@
 ## How to run this app locally
-
-1.First,clone the repository:
-2.Second, run the development server:
+1. clone the repository.
+2.  run the development server.
 
 ```bash
 npm install
